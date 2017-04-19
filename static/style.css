@@ -1,0 +1,127 @@
+.current_masting {
+		background: #000;
+		color: #fff;
+	}
+
+	#current {
+		text-transform: uppercase;
+	}
+
+	.masting {
+		padding: 20px;
+		border-bottom: 2px dotted black;
+	}
+
+	li {
+		list-style: none;
+	}
+
+	body {
+		font-family: 'Source Sans Pro', sans-serif;
+		margin: 0;
+		padding: 0;
+	}
+
+	h1, h3 {
+		font-family: 'Slabo 27px', serif;
+	}
+
+	h1 {
+		text-shadow: 1px 1px 1px white; 
+		font-size: 45px;
+	}
+
+	h3 {
+		font-size: 23px;
+	}
+
+	.yearcontainer > h3, .yearcontainernow > h3 {
+		padding: 20px 0 0 20px;
+		font-size: 35px;
+		cursor: pointer;
+	}
+
+	h3, p {
+		margin: 0;
+	}
+
+	a {
+		color: inherit;
+	}
+
+	a:visited {
+		color: inherit;
+	}
+
+	i {
+		transition: all 0.3s;
+	}
+
+	#intro {
+		background: 
+		   linear-gradient(
+		     rgba(0, 0, 0, 0.8), 
+		     rgba(0, 0, 0, 0.7)
+		   ),
+		   url(/static/halfmast.jpg) 80%;
+		background-size: cover;
+		height: 70vh;
+		padding: 10px 50px;   
+		color: #fff;
+	}
+
+	.currentyear, .year2016, .year2015, .year2014, .year2013, .year2012, .year2011 {
+		max-height: 0;
+		overflow: hidden;
+		-webkit-transition: max-height 0.8s;
+		-moz-transition: max-height 0.8s;
+		transition: max-height 0.8s;
+	}
+
+	footer {
+		margin: 20px 0 0 0;
+		text-align: center;
+		font-family: 'Slabo 27px', serif;
+	}
+
+	.big {
+		max-height: inherit;
+	}
+
+	div#chartContain {
+	    width: 60%;
+	    float: right;
+	    overflow: hidden;
+	    min-width: 300px;
+	}
+
+	div#chartContain h3 {
+	    margin: 20px 0 0px
+	     0;
+	     text-align: center;
+	}
+
+	#chartContain p {
+		text-align: center;
+		margin: 0 0 10px 0;
+	}
+
+	canvas#myChart {
+	    width: 100% !important;
+	    height: 100% !important;
+	}
+
+	@media(max-width: 400px) {
+		#intro {
+			height: inherit;
+		}
+		div#chartContain {
+			width: 100%;
+		}
+		h1 {
+			font-size: 30px;
+		}
+		h2 {
+			font-size: 20px;
+		}
+	}

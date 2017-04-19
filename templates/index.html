@@ -6,84 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
-<style>
-	.current_masting {
-		background: #000;
-		color: #fff;
-	}
-
-	#current {
-		text-transform: uppercase;
-	}
-
-	.masting {
-		padding: 20px;
-		border-bottom: 2px dotted black;
-	}
-
-	li {
-		list-style: none;
-	}
-
-	body {
-		font-family: 'Source Sans Pro', sans-serif;
-		margin: 0;
-		padding: 0;
-	}
-
-	h1, h3 {
-		font-family: 'Slabo 27px', serif;
-	}
-
-	h1 {
-		text-shadow: 1px 1px 1px white; 
-		font-size: 45px;
-	}
-
-	h3 {
-		font-size: 23px;
-	}
-
-	h3, p {
-		margin: 0;
-	}
-
-	a {
-		color: inherit;
-	}
-
-	a:visited {
-		color: inherit;
-	}
-
-	#intro {
-		background: 
-		   linear-gradient(
-		     rgba(0, 0, 0, 0.8), 
-		     rgba(0, 0, 0, 0.6)
-		   ),
-		   url(/static/halfmast.jpg) 80%;
-		background-size: cover;
-		height: 70vh;
-		padding: 50px;   
-		color: #fff;
-	}
-
-/*	#container {
-		width: 60%;
-	}*/
-
-</style>
  
 <body>
 
 	<div id="intro">
 
 		<h1>Why are Canadian flags at half mast?</h1>
-		<h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur voluptatem eius.</h2>
-
+		<h2><i class="fa fa-quote-left" aria-hidden="true"></i> Given that such flags are recognized as paramount symbols of their nations, the act of half-masting is a dramatic visual statement that speaks to the sense of loss that is shared by all their citizens. <i class="fa fa-quote-right" aria-hidden="true"></i>
+<br> – <small>Canadian Heritage website, where half-masting rules and notices are posted.</small></h2>
 	</div>
 
 	<div id="container">
@@ -91,45 +23,58 @@
 		<div class="current">
 		</div>
 
-		<div class="yearcontainer">
-			<h3>2017</h3>
-			<div class="currentyear">
+		<div id="chartContain">
+			<h3>Rules cited in half-mastings</h3>
+			<p>Hover to see half-mastings by rules</p>
+			<canvas id="myChart"></canvas>
+		</div>
+
+		<div class="yearcontainernow">
+			<h3>2017 <i class="fa fa-chevron-right" aria-hidden="true"></i>
+</h3>
+			<div class="currentyear big">
 			</div>
 		</div>
 
 		<div class="yearcontainer">
-			<h3>2016</h3>
+			<h3>2016 <i class="fa fa-chevron-down" aria-hidden="true"></i>
+</h3>
 			<div class="year2016">
 			</div>
 		</div>
 
 		<div class="yearcontainer">
-		<h3>2015</h3>
+		<h3>2015 <i class="fa fa-chevron-down" aria-hidden="true"></i>
+</h3>
 			<div class="year2015">
 			</div>
 		</div>
 
 		<div class="yearcontainer">
-			<h3>2014 </h3>
+			<h3>2014 <i class="fa fa-chevron-down" aria-hidden="true"></i>
+</h3>
 			<div class="year2014">
 			</div>
 		</div>
 
 		<div class="yearcontainer">
-			<h3>2013</h3>
+			<h3>2013 <i class="fa fa-chevron-down" aria-hidden="true"></i>
+</h3>
 			<div class="year2013">
 			</div>
 		</div>
 
 		<div class="yearcontainer">
-			<h3>2012</h3>
+			<h3>2012 <i class="fa fa-chevron-down" aria-hidden="true"></i>
+</h3>
 			<div class="year2012">
 			</div>
 		</div>
 
 
 		<div class="yearcontainer">
-			<h3>2011</h3>
+			<h3>2011 <i class="fa fa-chevron-down" aria-hidden="true"></i>
+</h3>
 			<div class="year2011">
 			</div>
 		</div>
@@ -139,116 +84,120 @@
 				{% if row.happening == True %}
 					<div class="current_masting masting">
 					<h3 id="current">Current half-masting:</h3>
-					<h3> {{ row.title }} </h3>
+					<h3> {{ row.title }}</h3>
 				{% endif %}
 
 				{% if row.happening == False and row.currentyear == row.year %}
 					<div class="current_year masting">
-					<h3>{{ row.title }} </h3>
+					<h3>{{ row.title }}</h3>
 				{% endif %}
 
 				{% if row.year == "2016" %}
 					<div class="masting2016 masting">
-					<h3>{{ row.title }} </h3>
+					<h3>{{ row.title }}</h3>
 				{% endif %}
 
 				{% if row.year == "2015" %}
 					<div class="masting2015 masting">
-					<h3>{{ row.title }} </h3>
+					<h3>{{ row.title }}</h3>
 				{% endif %}
 
 				{% if row.year == "2014" %}
 					<div class="masting2014 masting">
-					<h3>{{ row.title }} </h3>
+					<h3>{{ row.title }}</h3>
 				{% endif %}
 			
 				{% if row.year == "2013" %}
 					<div class="masting2013 masting">
-					<h3>{{ row.title }} </h3>
+					<h3>{{ row.title }}</h3>
 				{% endif %}
 
 				{% if row.year == "2012" %}
 					<div class="masting2012 masting">
-					<h3>{{ row.title }} </h3>
+					<h3>{{ row.title }}</h3>
 				{% endif %}
 
 				{% if row.year == "2011" %}
 					<div class="masting2011 masting">
-					<h3>{{ row.title }} </h3>
+					<h3>{{ row.title }}</h3>
 				{% endif %}
 
 					<p><strong>When: </strong>{{ row.mastingperiod }}</p>
 					<p><strong>Where: </strong>{{ row.location }}</p>
 					<p><strong>Details: </strong>
 
+
+					{% if row.section == "Multiple" %}
+						<span class="multiple"></span>
+					{% endif %}
 					{% if row.section == "23" %}
-						Procedures: Coming into Effect.
+						<span class="rule23">Procedures: Coming into Effect.</span>
 					{% endif %}
 					{% if row.section == "22" %}
-						Procedures: Half-Masting Notice.
+						<span class="rule22">Procedures: Half-Masting Notice.</span>
 					{% endif %}
 					{% if row.section == "21" %}
-						Procedures: Exceptions to Legal Holidays or Visiting Foreign Head of State or Head of Government.
+						<span class="rule21">Procedures: Exceptions to Legal Holidays or Visiting Foreign Head of State or Head of Government.</span>
 					{% endif %}
 					{% if row.section == "20" %}
-						Procedures: Visiting Foreign Head of State or Head of Government.
+						<span class="rule20">Procedures: Visiting Foreign Head of State or Head of Government.</span>
 					{% endif %}
 					{% if row.section == "19" %}
-						Procedures: Legal Holidays.
+						<span class="rule19">Procedures: Legal Holidays.</span>
 					{% endif %}
 					{% if row.section == "18" %}
-						Discretionary Authority of the Prime Minister: Discretionary Authority of the Prime Minister.
+						<span class="rule18">Discretionary Authority of the Prime Minister: Discretionary Authority of the Prime Minister.</span>
 					{% endif %}
 					{% if row.section == "17" %}
-						Discretionary Authority of the Prime Minister: Delegation of Authority.
+						<span class="rule17">Discretionary Authority of the Prime Minister: Delegation of Authority.</span>
 					{% endif %}
 					{% if row.section == "16" %}
-						Discretionary Authority of the Prime Minister: Exceptional Circumstances.
+						<span class="rule16">Discretionary Authority of the Prime Minister: Exceptional Circumstances.</span>
 					{% endif %}
 					{% if row.section == "15" %}
-						Discretionary Authority of the Prime Minister: Foreign Heads of State or Heads of Government - Half-masting in Canada.
+						<span class="rule15">Discretionary Authority of the Prime Minister: Foreign Heads of State or Heads of Government - Half-masting in Canada.</span>
 					{% endif %}
 					{% if row.section == "14" %}
-						Discretionary Provisions: Employees of the Federal Government.
+						<span class="rule14">Discretionary Provisions: Employees of the Federal Government.</span>
 					{% endif %}
 					{% if row.section == "13" %}
-						Discretionary Provisions: Special Circumstances in a Foreign Country.
+						<span class="rule13">Discretionary Provisions: Special Circumstances in a Foreign Country.</span>
 					{% endif %}
 					{% if row.section == "12" %}
-						Discretionary Provisions: Foreign Heads of State or Heads of Government - Half-masting Abroad.
+						<span class="rule12">Discretionary Provisions: Foreign Heads of State or Heads of Government - Half-masting Abroad.</span>
 					{% endif %}
 					{% if row.section == "11" %}
-						Mandatory Half-masting: Special Days.
+						<span class="rule11">Mandatory Half-masting: Special Days.</span>
 					{% endif %}
 					{% if row.section == "10" %}
-						Mandatory Half-masting: Half-Masting Initiated by a Province or Territory.
+						<span class="rule10">Mandatory Half-masting: Half-Masting Initiated by a Province or Territory.</span>
 					{% endif %}
 					{% if row.section == "9" %}
-						Mandatory Half-masting: Accredited Heads of Mission to Canada while in Canada.
+						<span class="rule9">Mandatory Half-masting: Accredited Heads of Mission to Canada while in Canada.</span>
 					{% endif %}
 					{% if row.section == "8" %}
-						Mandatory Half-masting: Members of the House of Commons.
+						<span class="rule8">Mandatory Half-masting: Members of the House of Commons.</span>
 					{% endif %}
 					{% if row.section == "7" %}
-						Mandatory Half-masting: Privy Councillors and Senators.
+						<span class="rule7">Mandatory Half-masting: Privy Councillors and Senators.</span>
 					{% endif %}
 					{% if row.section == "6" %}
-						Mandatory Half-masting: Lieutenant Governors.
+						<span class="rule6">Mandatory Half-masting: Lieutenant Governors.</span>
 					{% endif %}
 					{% if row.section == "5" %}
-						Mandatory Half-masting: Chief Justice of Canada and Members of the Canadian Ministry.
+						<span class="rule5">Mandatory Half-masting: Chief Justice of Canada and Members of the Canadian Ministry.</span>
 					{% endif %}
 					{% if row.section == "4" %}
-						Mandatory Half-masting: Former Prime Minister.
+						<span class="rule4">Mandatory Half-masting: Former Prime Minister.</span>
 					{% endif %}
 					{% if row.section == "3" %}
-						Mandatory Half-masting: Former Governor General.
+						<span class="rule3">Mandatory Half-masting: Former Governor General.</span>
 					{% endif %}
 					{% if row.section == "2" %}
-						Mandatory Half-masting: Sovereign's Family.
+						<span class="rule2">Mandatory Half-masting: Sovereign's Family.</span>
 					{% endif %}
 					{% if row.section == "1" %}
-						Mandatory Half-masting: The Sovereign, the Governor General and the Prime Minister.
+						<span class="rule1">Mandatory Half-masting: The Sovereign, the Governor General and the Prime Minister.</span>
 					{% endif %}
 					Rule cited: <a href="http://canada.pch.gc.ca/eng/1444133232495">{{row.section}}</a>.</p>
 				</div>
@@ -257,52 +206,16 @@
 
 	</div>
 
+	<footer>
+		<p>Made by <a href="http://carysmills.com/">Carys Mills</a></p>
+	</footer>
+
 	<script
 	  src="https://code.jquery.com/jquery-3.2.1.min.js"
 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	  crossorigin="anonymous"></script>
-
-	<script>
-
-	$(document).ready(function(){
-
-		$(".current_masting").each(function(){
-			$(".current").append($(this));
-		});
-
-		$(".current_year").each(function(){
-			$(".currentyear").append($(this));
-		});
-
-		$(".masting2016").each(function(){
-			$(".year2016").append($(this));
-		});
-
-		$(".masting2015").each(function(){
-			$(".year2015").append($(this));
-		});
-
-		$(".masting2014").each(function(){
-			$(".year2014").append($(this));
-		});
-
-		$(".masting2013").each(function(){
-			$(".year2013").append($(this));
-		});
-
-		$(".masting2012").each(function(){
-			$(".year2012").append($(this));
-		});
-
-		$(".masting2011").each(function(){
-			$(".year2011").append($(this));
-		});
-
-
-	});
-
-	</script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
 
 </body>
  
