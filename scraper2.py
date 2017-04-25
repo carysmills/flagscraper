@@ -15,9 +15,8 @@ data = r.text
 soup = BeautifulSoup(data)
 containers = soup.findAll("item")
 index1 = 0
-date2 = "NA"
 
-with open('flagdata2.csv', 'w') as csvfile:
+with open('static/flagdata2.csv', 'w') as csvfile:
 	csvwriter = csv.writer(csvfile, delimiter="|")
 	csvwriter.writerow(["title", "pubdate", "mastingperiod", "occasion", "location", "section", "date1", "date2", "year"])
 
@@ -38,8 +37,9 @@ with open('flagdata2.csv', 'w') as csvfile:
 		counter = 0
 
 		#find instances of the date once or twice, join the months with the day
-		for m in re.finditer('January |january |February |february |March |march |April |april |May |may |June |june |july |July |August |august |September |september |October |october |november |November |december |December ', split):          #
+		for m in re.finditer('January |january |February |february |March |march |April |april |May |may |June |june |july |July |August |august |September |september |October |october |november |November |december |December ', split):
 			counter+= 1
+			date2 = "NA"
 			split1 = split[m.start():m.end()]
 			split2 = split[m.end():m.end() + 10]
 			split3 = re.findall('\d+',split2)
@@ -50,11 +50,14 @@ with open('flagdata2.csv', 'w') as csvfile:
 				matches = datefinder.find_dates(finaldate)
 				for match in matches:
 					date1 = match.replace(year= newpubdate.year)
-
 			else:
 				matches = datefinder.find_dates(finaldate)
 				for match in matches:
 					date2 = match.replace(year= newpubdate.year)
+
+		print "date1" ,date1
+		print "date2" ,date2
+		print "-----"
 
 		# isolate occasion
 		start1 = 'Occasion :'

@@ -18,7 +18,7 @@ def main():
 
 	blob = []
 
-	with open('flagdata2.csv', 'r') as csvfile:
+	with open('static/flagdata2.csv', 'r') as csvfile:
 		csvcontent = csv.DictReader(csvfile, delimiter='|')
 		for row in csvcontent:
 			row = {key: unicode(value, 'utf-8') for key, value in row.iteritems()}

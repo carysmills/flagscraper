@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
  
 <body>
@@ -24,17 +25,18 @@
 		</div>
 
 		<div id="chartContain">
-			<h3>Rules cited in half-mastings</h3>
-			<p>Hover to see half-mastings by rules</p>
+			<h3>Rules cited in half-masting notices</h3>
+			<p>Hover to see half-mastings by rules (all years)</p>
 			<canvas id="myChart"></canvas>
 		</div>
 
 		<div class="yearcontainernow">
-			<h3>2017 <i class="fa fa-chevron-right" aria-hidden="true"></i>
-</h3>
+			<h3>2017</h3>
 			<div class="currentyear big">
 			</div>
 		</div>
+
+		<div id="calendar_basic" style="width: 1000px; height: 200px;"></div>
 
 		<div class="yearcontainer">
 			<h3>2016 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -207,7 +209,7 @@
 	</div>
 
 	<footer>
-		<p>Made by <a href="http://carysmills.com/">Carys Mills</a></p>
+		<p>Made by <a href="http://carysmills.com/">Carys Mills</a>, using Flask, Chart.js and Google Charts.</p>
 	</footer>
 
 	<script
@@ -215,7 +217,98 @@
 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	  crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+	<script src="http://d3js.org/d3.v3.js"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
+
+	<script>
+
+	google.charts.load("current", {packages:["calendar"]});
+	      google.charts.setOnLoadCallback(drawChart);
+
+	   function drawChart() {
+	       var dataTable = new google.visualization.DataTable();
+	       dataTable.addColumn({ type: 'date', id: 'Date' });
+	       dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+
+	       {% for row in rows %}
+	       	if ({{row.year}} == 2016) {	
+
+	       		// take zeros off date, convert
+	       		var date1 = "{{ row.date1}}".replace(/\s.*/g, '');
+	       		date1 = new Date(date1);
+	       		date1.setDate(date1.getDate() + 1);
+
+	       		var date2 = "{{ row.date2}}";
+	       		var section = "{{ row.section }}".replace("Multiple",30);
+	       		section = parseInt(section);
+
+	       		if (date2 !== "NA") {
+	       			date2 = date2.replace(/\s.*/g, '');
+	       			date2 = new Date(date2);
+	       			date2.setDate(date2.getDate() + 1);
+	       			
+	       			var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+	       			var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+	       			console.log("diff: " + diffDays);
+
+	       			for (i=0; i < (diffDays + 1); i++) {
+	       				diffdate = new Date(date1);
+	       				diffdate.setDate(diffdate.getDate() + i);
+
+	       				dataTable.addRows([
+	       				   [ diffdate, section],
+	       				 ]);
+	       			} 
+
+
+	       		}
+	       		else {
+	       			date2 == "NA";
+	       			dataTable.addRows([
+	       			   [ date1, section],
+	       			 ]);
+	       		}
+
+	       		console.log(date1);
+	       		console.log(date2);
+	       		console.log("---");
+	
+	       		dataTable.addRows([
+	       		   [ date1, section],
+	       		 ]);
+	       	}
+	       {% endfor%}
+
+	       var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+
+	       var options = {
+	       	colorAxis:  {minValue: 0,  colors: ['#83858C', '#E7D8C9']},
+	         title: "Last year's half mastings",
+	         height: 200,
+	         calendar: { 
+	         	monthLabel: {
+	         	       fontName: 'Slabo 27px',
+	         	       fontSize: 12,
+	         	       color: '#000',
+	         	       bold: true,
+	         	     },
+	         	monthOutlineColor: {
+	         	   strokeWidth: 1.5
+	         	 },
+	         	yearLabel: {
+	         	       fontName: 'Source Sans Pro',
+	         	       fontSize: 32,
+	         	        color: '#000',
+	         	        bold: true,
+	         	      }
+	         },
+	         colorAxis: {values: [7, 11, 16, 10, 30, 19, 8],
+	         	colors: ["#D138BF", "#D7FDEC", "#E8FFB7", "#0CCA4A", "#494947", "#D64933", "#C6C5B9"]}
+	       };
+
+	       chart.draw(dataTable, options);
+	   }	
+	</script>
 
 </body>
  

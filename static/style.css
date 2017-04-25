@@ -111,6 +111,10 @@ canvas#myChart {
     height: 100% !important;
 }
 
+#calendar_basic {
+	margin: 20px auto;
+}
+
 @media(max-width: 400px) {
 	#intro {
 		height: inherit;

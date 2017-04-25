@@ -42,15 +42,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$(".yearcontainernow > h3").click(function(){
-		$(this).next().toggleClass("big");
-		if ($(this).children().hasClass("fa-chevron-right") == true) {
-			$(this).children().removeClass('fa-chevron-right').addClass('fa-chevron-down');
-		}
-		else {
-			$(this).children().removeClass('fa-chevron-down').addClass('fa-chevron-right');
-		}
-	});
+	// CHART.JS
 
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var myChart = new Chart(ctx, {
