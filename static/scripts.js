@@ -80,10 +80,12 @@ $(document).ready(function(){
 	        "#D64933",
 	        "#D4AA7D",
 	        "#90A9B7",
-	        "#CC444B"
+	        "#CC444B",
+	       	"#dedede", 
 
 	      ],
-	      data: [$(".multiple").length, 
+	      data: [
+	      $(".multiple").length, 
 	      $(".rule1").length,
 	      $(".rule2").length,
 	      $(".rule3").length,

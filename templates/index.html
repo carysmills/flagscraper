@@ -28,6 +28,39 @@
 			<h3>Rules cited in half-masting notices</h3>
 			<p>Hover to see half-mastings by rules (all years)</p>
 			<canvas id="myChart"></canvas>
+
+			<div id="rules">
+			<h3>The rules</h3>
+			<ol>
+				<h4>Mandatory Half-Mastings:</h4>
+				<li>The Sovereign, the Governor General and the Prime Minister<span id="s1"></span></li>
+				<li>Sovereign's Family<span id="s2"></span></li>
+				<li>Former Prime Minister<span id="s3"></span></li>
+				<li>Former Governor General<span id="s4"></span></li>
+				<li>Chief Justice of Canada and Members of the Canadian Ministry<span id="s5"></span></li>
+				<li>Lieutenant Governors<span id="s6"></span> </li>
+				<li>Privy Councillors and Senators <span id="s7"></span></li>
+				<li>Members of the House of Commons <span id="s8"></span></li>
+				<li>Accredited Heads of Mission to Canada while in Canada <span id="s9"></span></li>
+				<li>Half-Masting Initiated by a Province or Territory <span id="s10"></span></li>
+				<li>Special Days <span id="s11"></span></li>
+				<h4>Discretionary Provisions:</h4>
+				<li>Foreign Heads of State or Heads of Government - Half-masting Abroad <span id="s12"></span></li>
+				<li>Special Circumstances in a Foreign Country <span id="s13"></span></li>
+				<li>Employees of the Federal Government <span id="s14"></span></li>
+				<h4>Discretionary Authority of the Prime Minister</h4>
+				<li>Foreign Heads of State or Heads of Government - Half-masting in Canada <span id="s15"></span></li>
+				<li>Exceptional Circumstances <span id="s16"></span></li>
+				<li>Delegation of Authority<span id="s17"></span></li>
+				<li>Information from the Department of Canadian Heritage <span id="s18"></span></li>
+				<h4>Procedures</h4>
+				<li>Legal Holidays<span id="s19"></span></li>
+				<li>Visiting Foreign Head of State or Head of Government <span id="s20"></span></li>
+				<li>Exceptions to Sections 19 and 20 <span id="s21"></span></li>
+				<li>Half-Masting Notice <span id="s22"></span></li>
+				<li>Coming into Effect<span id="s23"></span></li>
+			</ol>
+			</div>
 		</div>
 
 		<div class="yearcontainernow">
@@ -36,7 +69,8 @@
 			</div>
 		</div>
 
-		<div id="calendar_basic" style="width: 1000px; height: 200px;"></div>
+		<div id="calendar_basic"></div>
+		<p><small>*Note: In cases where multiple half-mastings occur on the same day, the calendar reflects the entry entered most recently. For complete details, look at the the listings below.</small></p>
 
 		<div class="yearcontainer">
 			<h3>2016 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -222,20 +256,37 @@
 
 	<script>
 
+	var month = new Array();
+	month[0] = "January";
+	month[1] = "February";
+	month[2] = "March";
+	month[3] = "April";
+	month[4] = "May";
+	month[5] = "June";
+	month[6] = "July";
+	month[7] = "August";
+	month[8] = "September";
+	month[9] = "October";
+	month[10] = "November";
+	month[11] = "December";
+
 	google.charts.load("current", {packages:["calendar"]});
 	      google.charts.setOnLoadCallback(drawChart);
 
 	   function drawChart() {
 	       var dataTable = new google.visualization.DataTable();
-	       dataTable.addColumn({ type: 'date', id: 'Date' });
-	       dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+	       dataTable.addColumn('date', 'Date' );
+	       dataTable.addColumn('number', 'Section');
+	       dataTable.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}})
 
 	       {% for row in rows %}
+
 	       	if ({{row.year}} == 2016) {	
 
 	       		// take zeros off date, convert
 	       		var date1 = "{{ row.date1}}".replace(/\s.*/g, '');
 	       		date1 = new Date(date1);
+	       		var newdate1 = new Date(date1);
 	       		date1.setDate(date1.getDate() + 1);
 
 	       		var date2 = "{{ row.date2}}";
@@ -245,47 +296,43 @@
 	       		if (date2 !== "NA") {
 	       			date2 = date2.replace(/\s.*/g, '');
 	       			date2 = new Date(date2);
+	       			var newdate2 = new Date(date2);
 	       			date2.setDate(date2.getDate() + 1);
 	       			
 	       			var timeDiff = Math.abs(date2.getTime() - date1.getTime());
 	       			var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-	       			console.log("diff: " + diffDays);
 
 	       			for (i=0; i < (diffDays + 1); i++) {
 	       				diffdate = new Date(date1);
 	       				diffdate.setDate(diffdate.getDate() + i);
-
 	       				dataTable.addRows([
-	       				   [ diffdate, section],
+	       				   [ diffdate, section,"<div class='tooltip'><strong>Occasion</strong>: {{row.title}} <br><strong>Rule cited:</strong> {{row.section}} <br> <strong>Dates:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + " - " + month[newdate2.getMonth()] + " " + newdate2.getUTCDate() + "</div>" ],
 	       				 ]);
 	       			} 
-
-
 	       		}
 	       		else {
 	       			date2 == "NA";
 	       			dataTable.addRows([
-	       			   [ date1, section],
+	       			   [ date1, section,"<div class='tooltip'><strong>Occasion:</strong> {{row.title}} <br> <strong>Rule cited:</strong> {{row.section}} <br> <strong>Date:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + "</div>"],
 	       			 ]);
-	       		}
-
-	       		console.log(date1);
-	       		console.log(date2);
-	       		console.log("---");
-	
-	       		dataTable.addRows([
-	       		   [ date1, section],
-	       		 ]);
+	       		}	
+	 
 	       	}
 	       {% endfor%}
 
 	       var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
 
 	       var options = {
-	       	colorAxis:  {minValue: 0,  colors: ['#83858C', '#E7D8C9']},
+	       	tooltip: {isHtml: true},
 	         title: "Last year's half mastings",
-	         height: 200,
+	         height: $(window).width() / 4.4,
 	         calendar: { 
+	         	focusedCellColor: {
+	         	      stroke: 'grey',
+	         	      strokeOpacity: 0.2,
+	         	      strokeWidth: 1,
+	         	    },
+	         	cellSize: $(window).width() * 0.016,
 	         	monthLabel: {
 	         	       fontName: 'Slabo 27px',
 	         	       fontSize: 12,
@@ -302,10 +349,33 @@
 	         	        bold: true,
 	         	      }
 	         },
-	         colorAxis: {values: [7, 11, 16, 10, 30, 19, 8],
-	         	colors: ["#D138BF", "#D7FDEC", "#E8FFB7", "#0CCA4A", "#494947", "#D64933", "#C6C5B9"]}
+	         colorAxis: {values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 30],
+	         	colors: [	       
+	        "#CB4B16",
+	        "#1F8261",
+	        "#FFA500",
+	        "#35FF69",
+	        "#44CCFF",
+	        "#7494EA",
+	        "#D138BF",
+	        "#C6C5B9",
+	        "#62929E",
+	        "#EDB7AB",
+	        "#D7FDEC",
+	        "#A9FBD7",
+	        "#938BA1",
+	        "#9C528B",
+	        "#7371FC",
+	        "#E8FFB7",
+	        "#0CCA4A",
+	        "#03254E",
+	        "#D64933",
+	        "#D4AA7D",
+	        "#90A9B7",
+	        "#CC444B",
+	       	"#dedede",
+	       	"#494947"]}
 	       };
-
 	       chart.draw(dataTable, options);
 	   }	
 	</script>

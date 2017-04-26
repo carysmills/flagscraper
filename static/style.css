@@ -96,9 +96,18 @@ div#chartContain {
 }
 
 div#chartContain h3 {
-    margin: 20px 0 0px
+    margin: 30px 0 0px
      0;
      text-align: center;
+}
+
+div#chartContain #rules ol{
+     margin: 0;
+}
+
+div#chartContain #rules li {
+     text-align: left;
+     list-style-type: inherit;
 }
 
 #chartContain p {
@@ -112,10 +121,131 @@ canvas#myChart {
 }
 
 #calendar_basic {
-	margin: 20px auto;
+	margin: 20px auto 0 auto;
+}
+
+#rules ol {
+	font-size: 14px;
+}
+
+#rules h4 {
+	margin: 10px 0 0 0;
+}
+
+#rules span {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 0 5px;
+}
+
+#s1 {
+	background: #494947;
+}
+
+#s2 {
+	background: #CB4B16;
+}
+
+#s3 {
+	background: #1F8261;
+}
+
+#s4 {
+	background: #FFA500;
+}
+
+#s5 {
+	background: #35FF69;
+}
+
+#s6 {
+	background: #44CCFF;
+}
+
+#s7 {
+	background:#D138BF;  
+}
+
+#s8 {
+	background:#D138BF;  
+}
+
+#s9 {
+	background:#C6C5B9;  
+}
+
+#s10 {
+	background:#EDB7AB;  
+}
+
+#s11 {
+	background:#D7FDEC;  
+}
+
+#s12 {
+	background:#D7FDEC;  
+}
+
+#s13 {
+	background:#A9FBD7;  
+}
+
+#s14 {
+	background:#9C528B;  
+}
+
+#s15 {
+	background:#9C528B;  
+}
+
+#s16 {
+	background:#E8FFB7;  
+}
+
+#s17 {
+	background:#E8FFB7;  
+}
+
+#s18 {
+	background:#0CCA4A;  
+}
+
+#s19 {
+	background:#938BA1;  
+}
+
+#s20 {
+	background:#9C528B;  
+}
+
+#s21 {
+	background:#7494EA;  
+}
+
+#s22 {
+	background:#7494EA;  
+}
+
+#s23 {
+	background:#7494EA;  
+}
+
+.tooltip {
+    padding: 12px;
+    font-size: 14px;
+}
+
+.google-visualization-tooltip {
+	max-width: 30%;
 }
 
 @media(max-width: 400px) {
+	.tooltip {
+	    padding: 3px;
+	    font-size: 12px;
+	}
 	#intro {
 		height: inherit;
 	}
