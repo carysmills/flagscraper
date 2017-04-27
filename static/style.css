@@ -1,6 +1,8 @@
 .current_masting {
 		background: #000;
 		color: #fff;
+		margin: 0 -20px;
+		padding: 20px !important;
 }
 
 #current {
@@ -8,7 +10,7 @@
 }
 
 .masting {
-	padding: 20px;
+	padding: 20px 0;
 	border-bottom: 2px dotted black;
 }
 
@@ -36,9 +38,17 @@ h3 {
 }
 
 .yearcontainer > h3, .yearcontainernow > h3 {
-	padding: 20px 0 0 20px;
+	padding: 20px 0 0 0;
 	font-size: 35px;
 	cursor: pointer;
+}
+
+.yearcontainernow > h3 {
+	cursor: auto;
+}
+
+#container {
+	padding: 0 20px;
 }
 
 h3, p {
@@ -89,7 +99,7 @@ footer {
 }
 
 div#chartContain {
-    width: 60%;
+    width: 40%;
     float: right;
     overflow: hidden;
     min-width: 300px;
@@ -129,7 +139,8 @@ canvas#myChart {
 }
 
 #rules h4 {
-	margin: 10px 0 0 0;
+	margin: 15px 0 1px 0;
+	text-decoration: underline;
 }
 
 #rules span {
@@ -140,96 +151,110 @@ canvas#myChart {
     margin: 0 0 0 5px;
 }
 
+#calendarContain, #intro2 {
+	background: #F5F5F5;
+	padding: 10px;
+	margin: 0 -20px 5px -20px;
+}
+
+#calendarContain {
+	margin: 20px -20px 5px -20px;
+}
+
 #s1 {
-	background: #494947;
+	background: #FFFF00;
 }
 
 #s2 {
-	background: #CB4B16;
+	background: #1CE6FF;
 }
 
 #s3 {
-	background: #1F8261;
+	background: #FF34FF;
 }
 
 #s4 {
-	background: #FFA500;
+	background: #008941;
 }
 
 #s5 {
-	background: #35FF69;
+	background: #006FA6;
 }
 
 #s6 {
-	background: #44CCFF;
+	background: #A30059;
 }
 
 #s7 {
-	background:#D138BF;  
+	background:#63FFAC;  
 }
 
 #s8 {
-	background:#D138BF;  
+	background:#B79762;  
 }
 
 #s9 {
-	background:#C6C5B9;  
+	background:#997D87;  
 }
 
 #s10 {
-	background:#EDB7AB;  
+	background:#FFB500;  
 }
 
 #s11 {
-	background:#D7FDEC;  
+	background:#C2FFED;  
 }
 
 #s12 {
-	background:#D7FDEC;  
+	background:#7900D7;  
 }
 
 #s13 {
-	background:#A9FBD7;  
+	background:#D25B88;  
 }
 
 #s14 {
-	background:#9C528B;  
+	background:#6C5E46;  
 }
 
 #s15 {
-	background:#9C528B;  
+	background:#6C8F7D;  
 }
 
 #s16 {
-	background:#E8FFB7;  
+	background:#BDC9D2;  
 }
 
 #s17 {
-	background:#E8FFB7;  
+	background:#EA8B66;  
 }
 
 #s18 {
-	background:#0CCA4A;  
+	background:#00C6C8;  
 }
 
 #s19 {
-	background:#938BA1;  
+	background:#494B5A;  
 }
 
 #s20 {
-	background:#9C528B;  
+	background:#B894A6;  
 }
 
 #s21 {
-	background:#7494EA;  
+	background:#006A66;  
 }
 
 #s22 {
-	background:#7494EA;  
+	background:#F4D749;  
 }
 
 #s23 {
-	background:#7494EA;  
+	background:#6B94AA;  
+}
+
+#s24 {
+	background:#00005F;
 }
 
 .tooltip {
@@ -241,7 +266,7 @@ canvas#myChart {
 	max-width: 30%;
 }
 
-@media(max-width: 400px) {
+@media(max-width: 500px) {
 	.tooltip {
 	    padding: 3px;
 	    font-size: 12px;
@@ -251,6 +276,7 @@ canvas#myChart {
 	}
 	div#chartContain {
 		width: 100%;
+		min-width: inherit;
 	}
 	h1 {
 		font-size: 30px;

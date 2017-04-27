@@ -24,6 +24,12 @@
 		<div class="current">
 		</div>
 
+		<div id="intro2">
+
+		<p>This site Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit exercitationem hic explicabo dicta tempore. Maiores quam mollitia aperiam expedita. Quod quam necessitatibus qui quibusdam mollitia itaque consequatur nihil. Quis, voluptatem.</p>
+
+		</div>
+
 		<div id="chartContain">
 			<h3>Rules cited in half-masting notices</h3>
 			<p>Hover to see half-mastings by rules (all years)</p>
@@ -59,6 +65,8 @@
 				<li>Exceptions to Sections 19 and 20 <span id="s21"></span></li>
 				<li>Half-Masting Notice <span id="s22"></span></li>
 				<li>Coming into Effect<span id="s23"></span></li>
+
+				<h5>Multiple sections cited <span id="s24"></span></h5>
 			</ol>
 			</div>
 		</div>
@@ -69,8 +77,10 @@
 			</div>
 		</div>
 
-		<div id="calendar_basic"></div>
-		<p><small>*Note: In cases where multiple half-mastings occur on the same day, the calendar reflects the entry entered most recently. For complete details, look at the the listings below.</small></p>
+		<div id="calendarContain">
+			<div id="calendar_basic"></div>
+			<p><small>*Note: In cases where multiple half-mastings occur on the same day, the calendar reflects the entry entered most recently. For complete details, look at the the listings below.</small></p>
+		</div>
 
 		<div class="yearcontainer">
 			<h3>2016 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -325,14 +335,14 @@
 	       var options = {
 	       	tooltip: {isHtml: true},
 	         title: "Last year's half mastings",
-	         height: $(window).width() / 4.4,
+	         height: Math.min(($(window).width() / 3.7), 200),
 	         calendar: { 
 	         	focusedCellColor: {
 	         	      stroke: 'grey',
 	         	      strokeOpacity: 0.2,
 	         	      strokeWidth: 1,
 	         	    },
-	         	cellSize: $(window).width() * 0.016,
+	         	cellSize: $(window).width() * 0.015,
 	         	monthLabel: {
 	         	       fontName: 'Slabo 27px',
 	         	       fontSize: 12,
@@ -351,33 +361,34 @@
 	         },
 	         colorAxis: {values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 30],
 	         	colors: [	       
-	        "#CB4B16",
-	        "#1F8261",
-	        "#FFA500",
-	        "#35FF69",
-	        "#44CCFF",
-	        "#7494EA",
-	        "#D138BF",
-	        "#C6C5B9",
-	        "#62929E",
-	        "#EDB7AB",
-	        "#D7FDEC",
-	        "#A9FBD7",
-	        "#938BA1",
-	        "#9C528B",
-	        "#7371FC",
-	        "#E8FFB7",
-	        "#0CCA4A",
-	        "#03254E",
-	        "#D64933",
-	        "#D4AA7D",
-	        "#90A9B7",
-	        "#CC444B",
-	       	"#dedede",
-	       	"#494947"]}
+	        "#FFFF00",
+	        "#1CE6FF",
+	        "#FF34FF",
+	        "#008941",
+	        "#006FA6",
+	        "#A30059",
+	        "#63FFAC",
+	        "#B79762",
+	        "#997D87",
+	        "#FFB500",
+	        "#C2FFED",
+	        "#7900D7",
+	        "#D25B88",
+	        "#6C5E46",
+	        "#6C8F7D",
+	        "#BDC9D2",
+	        "#EA8B66",
+	        "#00C6C8",
+	        "#494B5A",
+	        "#B894A6",
+	        "#006A66",
+	        "#F4D749",
+	       	"#6B94AA",
+	       	"#00005F"]}
 	       };
 	       chart.draw(dataTable, options);
-	   }	
+	   }
+
 	</script>
 
 </body>

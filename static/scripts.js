@@ -1,5 +1,13 @@
-$(document).ready(function(){
+function deleteLegend() {
+	for (i=23; i>-1;i--){
+		$("text").eq(i).remove();
+	}
+	for (i=24; i>-1;i--){
+		$("path").eq(i).remove();
+	}
+}
 
+function placeContent() {
 	$(".current_masting").each(function(){
 		$(".current").append($(this));
 	});
@@ -31,19 +39,19 @@ $(document).ready(function(){
 	$(".masting2011").each(function(){
 		$(".year2011").append($(this));
 	});
+}
 
-	$(".yearcontainer > h3").click(function(){
-		$(this).next().toggleClass("big");
-		if ($(this).children().hasClass("fa-chevron-right") == true) {
-			$(this).children().removeClass('fa-chevron-right').addClass('fa-chevron-down');
-		}
-		else {
-			$(this).children().removeClass('fa-chevron-down').addClass('fa-chevron-right');
-		}
-	});
+$(".yearcontainer > h3").click(function(){
+	$(this).next().toggleClass("big");
+	if ($(this).children().hasClass("fa-chevron-right") == true) {
+		$(this).children().removeClass('fa-chevron-right').addClass('fa-chevron-down');
+	}
+	else {
+		$(this).children().removeClass('fa-chevron-down').addClass('fa-chevron-right');
+	}
+});
 
-	// CHART.JS
-
+function chartJS(){
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var myChart = new Chart(ctx, {
 	  type: 'pie',
@@ -58,30 +66,30 @@ $(document).ready(function(){
 	    labels: ["Multiple sections", "The Sovereign, the Governor General and the Prime Minister", "Sovereign's Family", "Former Governor General", "Former Prime Minister", "Chief Justice of Canada and Members of the Canadian Ministry", "Lieutenant Governors", "Privy Councillors and Senators", "Members of the House of Commons", "Accredited Heads of Mission to Canada while in Canada", "Half-Masting Initiated by a Province or Territory", "Special Days", "Foreign Heads of State or Heads of Government - Half-masting Abroad", "Special Circumstances in a Foreign Country", "Employees of the Federal Government", "Foreign Heads of State or Heads of Government - Half-masting in Canada", "Exceptional Circumstances", "Delegation of Authority", "Information from the Department of Canadian Heritage", "Procedures: Legal holidays", "Procedures: Visiting Foreign Head of State or Head of Government", "Procedures: Exceptions to Sections 19 and 20", "Procedures: Half-Masting Notice", "Procedures: Coming into Effect"],
 	    datasets: [{
 	      backgroundColor: [
-	        "#494947",
-	        "#CB4B16",
-	        "#1F8261",
-	        "#FFA500",
-	        "#35FF69",
-	        "#44CCFF",
-	        "#7494EA",
-	        "#D138BF",
-	        "#C6C5B9",
-	        "#62929E",
-	        "#EDB7AB",
-	        "#D7FDEC",
-	        "#A9FBD7",
-	        "#938BA1",
-	        "#9C528B",
-	        "#7371FC",
-	        "#E8FFB7",
-	        "#0CCA4A",
-	        "#03254E",
-	        "#D64933",
-	        "#D4AA7D",
-	        "#90A9B7",
-	        "#CC444B",
-	       	"#dedede", 
+	        "#00005F",
+	        "#FFFF00",
+	        "#1CE6FF",
+	        "#FF34FF",
+	        "#008941",
+	        "#006FA6",
+	        "#A30059",
+	        "#63FFAC",
+	        "#B79762",
+	        "#997D87",
+	        "#FFB500",
+	        "#C2FFED",
+	        "#7900D7",
+	        "#D25B88",
+	        "#6C5E46",
+	        "#6C8F7D",
+	        "#BDC9D2",
+	        "#EA8B66",
+	        "#00C6C8",
+	        "#494B5A",
+	        "#B894A6",
+	        "#006A66",
+	        "#F4D749",
+	       	"#6B94AA", 
 
 	      ],
 	      data: [
@@ -114,5 +122,11 @@ $(document).ready(function(){
 	    }]
 	  }
 	});
+};
 
+
+$(document).ready(function(){
+	setTimeout(deleteLegend, 1000);
+	chartJS();
+	placeContent();
 });
