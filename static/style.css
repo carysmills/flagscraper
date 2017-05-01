@@ -143,12 +143,17 @@ canvas#myChart {
 	text-decoration: underline;
 }
 
-#rules span {
+#rules li span {
+	margin: 0 0 0 5px;
+}
+
+#rules span,
+span.legend {
     width: 12px;
     height: 12px;
     display: inline-block;
     vertical-align: middle;
-    margin: 0 0 0 5px;
+    margin: 0;
 }
 
 #calendarContain, #intro2 {
@@ -166,103 +171,103 @@ canvas#myChart {
 	margin: 20px -20px 5px -20px;
 }
 
-#s1 {
+.s1 {
 	background: #FFFF00;
 }
 
-#s2 {
+.s2 {
 	background: #1CE6FF;
 }
 
-#s3 {
+.s3 {
 	background: #FF34FF;
 }
 
-#s4 {
+.s4 {
 	background: #008941;
 }
 
-#s5 {
+.s5 {
 	background: #006FA6;
 }
 
-#s6 {
+.s6 {
 	background: #A30059;
 }
 
-#s7 {
+.s7 {
 	background:#63FFAC;  
 }
 
-#s8 {
+.s8 {
 	background:#B79762;  
 }
 
-#s9 {
+.s9 {
 	background:#997D87;  
 }
 
-#s10 {
+.s10 {
 	background:#FFB500;  
 }
 
-#s11 {
+.s11 {
 	background:#C2FFED;  
 }
 
-#s12 {
+.s12 {
 	background:#7900D7;  
 }
 
-#s13 {
+.s13 {
 	background:#D25B88;  
 }
 
-#s14 {
+.s14 {
 	background:#6C5E46;  
 }
 
-#s15 {
+.s15 {
 	background:#6C8F7D;  
 }
 
-#s16 {
+.s16 {
 	background:#BDC9D2;  
 }
 
-#s17 {
+.s17 {
 	background:#EA8B66;  
 }
 
-#s18 {
+.s18 {
 	background:#00C6C8;  
 }
 
-#s19 {
+.s19 {
 	background:#494B5A;  
 }
 
-#s20 {
+.s20 {
 	background:#B894A6;  
 }
 
-#s21 {
+.s21 {
 	background:#006A66;  
 }
 
-#s22 {
+.s22 {
 	background:#F4D749;  
 }
 
-#s23 {
+.s23 {
 	background:#6B94AA;  
 }
 
-#s24 {
+.s24 {
 	background:#00005F;
 }
 
-#s25 {
+.s25 {
 	background: #bada55;
 	width: 12px;
 	height: 12px;
