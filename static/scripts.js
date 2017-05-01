@@ -1,8 +1,8 @@
 function deleteLegend() {
-	for (i=23; i>-1;i--){
+	for (i=24; i>-1;i--){
 		$("text").eq(i).remove();
 	}
-	for (i=24; i>-1;i--){
+	for (i=25; i>-1;i--){
 		$("path").eq(i).remove();
 	}
 }

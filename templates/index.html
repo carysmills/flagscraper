@@ -16,7 +16,7 @@
 
 		<h1>Why are Canadian flags at half mast?</h1>
 		<h2><i class="fa fa-quote-left" aria-hidden="true"></i> Given that such flags are recognized as paramount symbols of their nations, the act of half-masting is a dramatic visual statement that speaks to the sense of loss that is shared by all their citizens. <i class="fa fa-quote-right" aria-hidden="true"></i>
-<br> – <small>Canadian Heritage website, where half-masting rules and notices are posted.</small></h2>
+<br> – <small>Canadian Heritage website</small></h2>
 	</div>
 
 	<div id="container">
@@ -26,7 +26,7 @@
 
 		<div id="intro2">
 
-		<p>This site Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit exercitationem hic explicabo dicta tempore. Maiores quam mollitia aperiam expedita. Quod quam necessitatibus qui quibusdam mollitia itaque consequatur nihil. Quis, voluptatem.</p>
+		<h3>This site visualizes and lists the Canadian government's <a target="_blank" href="http://canada.pch.gc.ca/eng/1461849633127">half-masting notices</a> and the rules that are cited.</h3>
 
 		</div>
 
@@ -65,8 +65,7 @@
 				<li>Exceptions to Sections 19 and 20 <span id="s21"></span></li>
 				<li>Half-Masting Notice <span id="s22"></span></li>
 				<li>Coming into Effect<span id="s23"></span></li>
-
-				<h5>Multiple sections cited <span id="s24"></span></h5>
+				<h4 id="multiple">Multiple sections cited <span id="s24"></span></h4>
 			</ol>
 			</div>
 		</div>
@@ -79,7 +78,7 @@
 
 		<div id="calendarContain">
 			<div id="calendar_basic"></div>
-			<p><small>*Note: In cases where multiple half-mastings occur on the same day, the calendar reflects the entry entered most recently. For complete details, look at the the listings below.</small></p>
+			<p>*Indicates more than one half-masting on a day <span id="s25"></span></p>
 		</div>
 
 		<div class="yearcontainer">
@@ -253,7 +252,7 @@
 	</div>
 
 	<footer>
-		<p>Made by <a href="http://carysmills.com/">Carys Mills</a>, using Flask, Chart.js and Google Charts.</p>
+		<p>Made by <a href="http://carysmills.com/">Carys Mills</a>.</p>
 	</footer>
 
 	<script
@@ -261,7 +260,6 @@
 	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	  crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
-	<script src="http://d3js.org/d3.v3.js"></script>
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
 
 	<script>
@@ -289,6 +287,8 @@
 	       dataTable.addColumn('number', 'Section');
 	       dataTable.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}})
 
+	       var dates = [];
+
 	       {% for row in rows %}
 
 	       	if ({{row.year}} == 2016) {	
@@ -299,10 +299,9 @@
 	       		var newdate1 = new Date(date1);
 	       		date1.setDate(date1.getDate() + 1);
 
-	       		var date2 = "{{ row.date2}}";
-	       		var section = "{{ row.section }}".replace("Multiple",30);
-	       		section = parseInt(section);
+	       		var date2 = "{{ row.date2 }}";
 
+	       		// DATE RANGE
 	       		if (date2 !== "NA") {
 	       			date2 = date2.replace(/\s.*/g, '');
 	       			date2 = new Date(date2);
@@ -313,21 +312,53 @@
 	       			var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
 
 	       			for (i=0; i < (diffDays + 1); i++) {
-	       				diffdate = new Date(date1);
+	       				diffdate = new Date(date1 - 1);
+	       				var newdiffdate = diffdate;
 	       				diffdate.setDate(diffdate.getDate() + i);
-	       				dataTable.addRows([
-	       				   [ diffdate, section,"<div class='tooltip'><strong>Occasion</strong>: {{row.title}} <br><strong>Rule cited:</strong> {{row.section}} <br> <strong>Dates:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + " - " + month[newdate2.getMonth()] + " " + newdate2.getUTCDate() + "</div>" ],
-	       				 ]);
+
+	       				if (dates.includes(diffdate.toString())) {
+	       					section = 31;
+	       					dataTable.addRows([
+	       					   [ diffdate, section,"<div class='tooltip'><strong>Multiple half-mastings</strong><br><strong>Date:</strong> " + month[newdiffdate.getMonth()] + " " + newdiffdate.getUTCDate() + "</div>" ],
+	       					 ]);
+	       				}
+
+	       				else {
+	       					var section = "{{ row.section }}".replace("Multiple",30);
+	       					section = parseInt(section);
+
+	       					dataTable.addRows([
+	       					   [ diffdate, section,"<div class='tooltip'><strong>Occasion</strong>: {{row.title}} <br><strong>Rule cited:</strong> {{row.section}} <br> <strong>Location(s)</strong>: {{ row.location }} <br> <strong>Dates:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + " - " + month[newdate2.getMonth()] + " " + newdate2.getUTCDate() + "</div>" ],
+	       					 ]);
+	       				}
+	       				dates.push(diffdate.toString());
 	       			} 
 	       		}
+
+	       		// ONLY ONE DAY
 	       		else {
-	       			date2 == "NA";
-	       			dataTable.addRows([
-	       			   [ date1, section,"<div class='tooltip'><strong>Occasion:</strong> {{row.title}} <br> <strong>Rule cited:</strong> {{row.section}} <br> <strong>Date:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + "</div>"],
-	       			 ]);
+	       			if (dates.includes(date1.toString())) {
+	       				date2 == "NA";
+	       				section = 31;
+	       				dataTable.addRows([
+	       				   [ date1, section,"<div class='tooltip'><strong>Multiple half-mastings</strong> <br> <strong>Location(s)</strong>: {{ row.location }} <br><strong>Date:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + "</div>"],
+	       				 ]);
+	       			}
+
+	       			else {
+	       				date2 == "NA";
+
+	       				var section = "{{ row.section }}".replace("Multiple",30);
+	       				section = parseInt(section);
+
+	       				dataTable.addRows([
+	       				   [ date1, section,"<div class='tooltip'><strong>Occasion:</strong> {{row.title}} <br> <strong>Rule cited:</strong> {{row.section}} <br> <strong>Location(s)</strong>: {{ row.location }} <br> <strong>Date:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + "</div>"],
+	       				 ]);
+	       			}
+	       			dates.push(date1.toString());
 	       		}	
-	 
 	       	}
+
 	       {% endfor%}
 
 	       var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
@@ -359,7 +390,7 @@
 	         	        bold: true,
 	         	      }
 	         },
-	         colorAxis: {values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 30],
+	         colorAxis: {values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 30, 31],
 	         	colors: [	       
 	        "#FFFF00",
 	        "#1CE6FF",
@@ -384,7 +415,8 @@
 	        "#006A66",
 	        "#F4D749",
 	       	"#6B94AA",
-	       	"#00005F"]}
+	       	"#00005F",
+	       	"#bada55"]}
 	       };
 	       chart.draw(dataTable, options);
 	   }

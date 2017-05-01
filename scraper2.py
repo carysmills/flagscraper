@@ -6,6 +6,15 @@ import re
 import dateutil
 from datetime import datetime
 import sys
+import tweepy, time, sys
+
+CONSUMER_KEY = 'tClwWO7mTLmmXLoPvPa0WMbVt'
+CONSUMER_SECRET = 'PbWfOVnWLua0Nv52SHBiV7aL7BDaa0jiw4RWbMfG1dVhdJfzko'
+ACCESS_KEY = '858776811731394560-mJReLVQPvyvFYu6Zkmwn4BuYyIVzizH'
+ACCESS_SECRET = '2Rqnj7zFrwGb2gdPGqjj3hmyHAUO7wImLyyZnM6o2WjP5'
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+api = tweepy.API(auth)
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -16,80 +25,98 @@ soup = BeautifulSoup(data)
 containers = soup.findAll("item")
 index1 = 0
 
-with open('static/flagdata2.csv', 'w') as csvfile:
+# check the old file to see the most recent pubdate
+with open('static/flagdata2.csv', 'r') as oldfile:
+	oldcsvcontent = csv.DictReader(oldfile, delimiter='|')
+	for row in oldcsvcontent:
+		oldpubdate = row['pubdate']
+
+# write the new file, if there's been a new entry
+with open('static/flagdata2.csv', 'a') as csvfile:
+	print oldpubdate
 	csvwriter = csv.writer(csvfile, delimiter="|")
-	csvwriter.writerow(["title", "pubdate", "mastingperiod", "occasion", "location", "section", "date1", "date2", "year"])
-
 	for i in containers:
-		title = containers[index1].find("title").text.encode('utf-8').strip()
-		pubdate = containers[index1].find("pubdate").text.encode('utf-8').strip()
-		info = containers[index1].find("description").text.encode('utf-8').strip()
-		newpubdate = dateutil.parser.parse(pubdate)
+		latestdate = containers[index1].find("pubdate").text.encode('utf-8').strip()
+		break
 
-		# isolate masting period
-		start = 'Period:'
-		end = 'Occasion'
-		s = info
-		mastingperiod = s[s.find(start)+len(start):s.rfind(end)]
+	if (latestdate == oldpubdate):
+		print "No new records."
 
-		# fix up period section / cut string off before passed away phrase
-		split = mastingperiod.split("passed away",1)[0] 
-		counter = 0
+	else:
+		for i in reversed(containers):
+			title = containers[index1].find("title").text.encode('utf-8').strip()
+			pubdate = containers[index1].find("pubdate").text.encode('utf-8').strip()
+			info = containers[index1].find("description").text.encode('utf-8').strip()
+			newpubdate = dateutil.parser.parse(pubdate)
 
-		#find instances of the date once or twice, join the months with the day
-		for m in re.finditer('January |january |February |february |March |march |April |april |May |may |June |june |july |July |August |august |September |september |October |october |november |November |december |December ', split):
-			counter+= 1
-			date2 = "NA"
-			split1 = split[m.start():m.end()]
-			split2 = split[m.end():m.end() + 10]
-			split3 = re.findall('\d+',split2)
-			finaldate = split1 + ', '.join(split3)
+			# isolate masting period
+			start = 'Period:'
+			end = 'Occasion'
+			s = info
+			mastingperiod = s[s.find(start)+len(start):s.rfind(end)]
 
-			# create variables for the csv
-			if (counter == 1):
-				matches = datefinder.find_dates(finaldate)
-				for match in matches:
-					date1 = match.replace(year= newpubdate.year)
+			# fix up period section / cut string off before passed away phrase
+			split = mastingperiod.split("passed away",1)[0] 
+			counter = 0
+
+			#find instances of the date once or twice, join the months with the day
+			for m in re.finditer('January |january |February |february |March |march |April |april |May |may |June |june |july |July |August |august |September |september |October |october |november |November |december |December ', split):
+				counter+= 1
+				date2 = "NA"
+				split1 = split[m.start():m.end()]
+				split2 = split[m.end():m.end() + 10]
+				split3 = re.findall('\d+',split2)
+				finaldate = split1 + ', '.join(split3)
+
+				# create variables for the csv
+				if (counter == 1):
+					matches = datefinder.find_dates(finaldate)
+					for match in matches:
+						date1 = match.replace(year= newpubdate.year)
+				else:
+					matches = datefinder.find_dates(finaldate)
+					for match in matches:
+						date2 = match.replace(year= newpubdate.year)
+						
+			# isolate occasion
+			start1 = 'Occasion :'
+			end1 = 'Masting location'
+			occasion = s[s.find(start1)+len(start1):s.rfind(end1)]
+
+			# isolate locations
+			start2 = 'Masting location(s):'
+			end2 = 'Additional'
+			location = s[s.find(start2)+len(start2):s.rfind(end2)]
+
+			# how to get the section number by itself
+			section = containers[index1].findAll("a")
+
+			# get the section links
+			for link in section:
+			    linktitle = link.text
+
+			# if more than one section or and, make variable be called multiple. otherwise just get the section by itself
+			if (len(section) > 1) or ("and" in linktitle) or ("Sections" in linktitle) or ("And" in linktitle) or ("&" in linktitle):
+				sectionno = "Multiple"
 			else:
-				matches = datefinder.find_dates(finaldate)
-				for match in matches:
-					date2 = match.replace(year= newpubdate.year)
+				sectionno = re.sub("[^0-9]", "", linktitle)
 
-		print "date1" ,date1
-		print "date2" ,date2
-		print "-----"
+			year = str(date1.year)
 
-		# isolate occasion
-		start1 = 'Occasion :'
-		end1 = 'Masting location'
-		occasion = s[s.find(start1)+len(start1):s.rfind(end1)]
+			# write to the CSV
+			csvwriter.writerow([title, pubdate, mastingperiod, occasion, location, sectionno, date1, date2, year])
 
-		# isolate locations
-		start2 = 'Masting location(s):'
-		end2 = 'Additional'
-		location = s[s.find(start2)+len(start2):s.rfind(end2)]
+			# tweet bot
+			func = lambda s: s[:1].lower() + s[1:] if s else ''
 
-		# how to get the section number by itself
-		section = containers[index1].findAll("a")
+			tweet = "Flags will be at half mast for " + title + " " + func(mastingperiod.lstrip())
+			link = "http://halfmast.ca"
+			tweetfinal = tweet[:117] + " " + link
+			print tweetfinal
+			api.update_status(status=tweetfinal)
 
-		# get the section links
-		for link in section:
-		    linktitle = link.text
-
-		# if more than one section or and, make variable be called multiple. otherwise just get the section by itself
-		if (len(section) > 1) or ("and" in linktitle) or ("Sections" in linktitle) or ("And" in linktitle) or ("&" in linktitle):
-			sectionno = "Multiple"
-		else:
-			sectionno = re.sub("[^0-9]", "", linktitle)
-
-		year = str(date1.year)
-
-		# write to the CSV
-		csvwriter.writerow([title, pubdate, mastingperiod, occasion, location, sectionno, date1, date2, year])
-
-		# iterate
-		index1+=1
-
-
+			# iterate
+			index1+=1
+			break
 
 
