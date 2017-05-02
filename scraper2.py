@@ -26,13 +26,13 @@ containers = soup.findAll("item")
 index1 = 0
 
 # check the old file to see the most recent pubdate
-with open('static/flagdata2.csv', 'r') as oldfile:
+with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'r') as oldfile:
 	oldcsvcontent = csv.DictReader(oldfile, delimiter='|')
 	for row in oldcsvcontent:
 		oldpubdate = row['pubdate']
 
 # write the new file, if there's been a new entry
-with open('static/flagdata2.csv', 'a') as csvfile:
+with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'a') as csvfile:
 	print oldpubdate
 	csvwriter = csv.writer(csvfile, delimiter="|")
 	for i in containers:
