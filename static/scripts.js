@@ -92,6 +92,7 @@ function chartJS(){
 	       	"#6B94AA", 
 
 	      ],
+	      borderWidth: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 	      data: [
 	      $(".multiple").length, 
 	      $(".rule1").length,
