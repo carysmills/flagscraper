@@ -126,7 +126,7 @@ function chartJS(){
 
 
 $(document).ready(function(){
-	setTimeout(deleteLegend, 1000);
+	setTimeout(deleteLegend, 2000);
 	chartJS();
 	placeContent();
 });
