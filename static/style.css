@@ -300,13 +300,13 @@ span.legend {
     margin: 9px 0;
 }
 
-iframe#twitter-widget-1 {
+iframe#twitter-widget-1, .fb-share-button.fb_iframe_widget {
     display: block;
     margin: 20px auto 10px auto;
 }
 
-#chartContain .fb-share-button.fb_iframe_widget {
-    margin: 0 auto;
+#chartContain .fb-share-button.fb_iframe_widget,#chartContain .twitter-share-button {
+    margin: 10px auto;
     display: block;
     max-width: 66px;
 }
