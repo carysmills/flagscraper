@@ -8,9 +8,29 @@
     <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Source+Sans+Pro" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<meta property="og:url" content="http://halfmast.ca"/>
+    <meta property="og:title" content="Why are Canadian flags at half mast?" />
+    <meta property="og:description" content="Canadian half-masting notices." />
+    <meta property="og:image" content="static/halfmast.jpg" /> 
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@halfmastcanada" />
+    <meta name="twitter:title" content="Why are Canadian flags at half mast?" />
+    <meta name="twitter:description" content="Canadian half-masting notices." />
+    <meta name="twitter:image" content="static/halfmast.jpg" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
 </head>
  
 <body>
+
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
 	<div id="intro">
 
@@ -22,6 +42,7 @@
 	<div id="container">
 
 		<div class="current">
+
 		</div>
 
 		<div id="intro2">
@@ -68,6 +89,16 @@
 				<h4 id="multiple">Multiple sections cited <span class="s24"></span></h4>
 			</ol>
 			</div>
+
+			<div id="socialContainer">
+
+				<a class="twitter-share-button"
+				  href="https://twitter.com/intent/tweet?text=Why%20are%20Canadian%20flags%20at%20half%20mast">Tweet</a>
+
+				  <div class="fb-share-button" data-href="http://halfmast.ca" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhalfmast.ca%2F&amp;src=sdkpreparse">Share</a></div>
+
+			</div>
+
 		</div>
 
 		<div class="yearcontainernow">
@@ -130,6 +161,12 @@
 					<div class="current_masting masting">
 					<h3 id="current">Current half-masting:</h3>
 					<h3> {{ row.title }}</h3>
+
+					<a class="twitter-share-button"
+					  href="https://twitter.com/intent/tweet?text=Flags%20are%20at%20half%20mast%20for%20{{row.title}}">Tweet</a>
+
+					  <div class="fb-share-button" data-href="http://halfmast.ca" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhalfmast.ca%2F&amp;src=sdkpreparse">Share</a></div>
+
 				{% endif %}
 
 				{% if row.happening == False and row.currentyear == row.year %}
@@ -432,6 +469,22 @@
 	  ga('create', 'UA-69057817-3', 'auto');
 	  ga('send', 'pageview');
 
+	</script>
+
+	<script>window.twttr = (function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0],
+		    t = window.twttr || {};
+		  if (d.getElementById(id)) return t;
+		  js = d.createElement(s);
+		  js.id = id;
+		  js.src = "https://platform.twitter.com/widgets.js";
+		  fjs.parentNode.insertBefore(js, fjs);
+		  t._e = [];
+		  t.ready = function(f) {
+		    t._e.push(f);
+		  };
+		  return t;
+		}(document, "script", "twitter-wjs"));
 	</script>
 
 </body>
