@@ -1,3 +1,13 @@
+a {
+    text-decoration: none;
+    padding: 1px;
+    transition: border-bottom 0.3s;
+}
+
+a:hover {
+    border-bottom: 2px solid black;
+}
+
 .current_masting {
 		background: #000;
 		color: #fff;
@@ -139,8 +149,9 @@ canvas#myChart {
 }
 
 #rules h4 {
-	margin: 15px 0 1px 0;
-	text-decoration: underline;
+	margin: 18px 0 1px 0;
+	border-bottom: 2px dotted black;
+	display: inline-block;
 }
 
 #rules li span {
@@ -167,103 +178,113 @@ span.legend {
 	border-bottom: 2px dotted lightgrey;
 }
 
+#intro2 h3 {
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+#calendarContain + h3 {
+    font-family: "Source Sans Pro";
+    font-size: 35px;
+    margin: 20px 0 0 0;
+}
+
 #calendarContain {
 	margin: 20px -20px 5px -20px;
 }
 
-.s1 {
+.rule1 {
 	background: #FFFF00;
 }
 
-.s2 {
+.rule2 {
 	background: #1CE6FF;
 }
 
-.s3 {
+.rule3 {
 	background: #FF34FF;
 }
 
-.s4 {
+.rule4 {
 	background: #008941;
 }
 
-.s5 {
+.rule5 {
 	background: #006FA6;
 }
 
-.s6 {
+.rule6 {
 	background: #A30059;
 }
 
-.s7 {
+.rule7 {
 	background:#63FFAC;  
 }
 
-.s8 {
+.rule8 {
 	background:#B79762;  
 }
 
-.s9 {
+.rule9 {
 	background:#997D87;  
 }
 
-.s10 {
+.rule10 {
 	background:#FFB500;  
 }
 
-.s11 {
+.rule11 {
 	background:#C2FFED;  
 }
 
-.s12 {
+.rule12 {
 	background:#7900D7;  
 }
 
-.s13 {
+.rule13 {
 	background:#D25B88;  
 }
 
-.s14 {
+.rule14 {
 	background:#6C5E46;  
 }
 
-.s15 {
+.rule15 {
 	background:#6C8F7D;  
 }
 
-.s16 {
+.rule16 {
 	background:#BDC9D2;  
 }
 
-.s17 {
+.rule17 {
 	background:#EA8B66;  
 }
 
-.s18 {
+.rule18 {
 	background:#00C6C8;  
 }
 
-.s19 {
+.rule19 {
 	background:#494B5A;  
 }
 
-.s20 {
+.rule20 {
 	background:#B894A6;  
 }
 
-.s21 {
+.rule21 {
 	background:#006A66;  
 }
 
-.s22 {
+.rule22 {
 	background:#F4D749;  
 }
 
-.s23 {
+.rule23 {
 	background:#6B94AA;  
 }
 
-.s24 {
+.ruleMultiple {
 	background:#00005F;
 }
 

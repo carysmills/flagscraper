@@ -53,40 +53,40 @@
 
 		<div id="chartContain">
 			<h3>Rules cited in half-masting notices</h3>
-			<p>Hover to see half-mastings by rules (all years)</p>
+			<p>Half-mastings by rules, April 16, 2011 to present</p>
 			<canvas id="myChart"></canvas>
 
 			<div id="rules">
 			<h3>The rules</h3>
 			<ol>
 				<h4>Mandatory Half-Mastings:</h4>
-				<li>The Sovereign, the Governor General and the Prime Minister<span class="s1"></span></li>
-				<li>Sovereign's Family<span class="s2"></span></li>
-				<li>Former Prime Minister<span class="s3"></span></li>
-				<li>Former Governor General<span class="s4"></span></li>
-				<li>Chief Justice of Canada and Members of the Canadian Ministry<span class="s5"></span></li>
-				<li>Lieutenant Governors<span class="s6"></span> </li>
-				<li>Privy Councillors and Senators <span class="s7"></span></li>
-				<li>Members of the House of Commons <span class="s8"></span></li>
-				<li>Accredited Heads of Mission to Canada while in Canada <span class="s9"></span></li>
-				<li>Half-Masting Initiated by a Province or Territory <span class="s10"></span></li>
-				<li>Special Days <span class="s11"></span></li>
+				<li>The Sovereign, the Governor General and the Prime Minister<span class="rule1"></span></li>
+				<li>Sovereign's Family<span class="rule2"></span></li>
+				<li>Former Prime Minister<span class="rule3"></span></li>
+				<li>Former Governor General<span class="rule4"></span></li>
+				<li>Chief Justice of Canada and Members of the Canadian Ministry<span class="rule5"></span></li>
+				<li>Lieutenant Governors<span class="rule6"></span> </li>
+				<li>Privy Councillors and Senators <span class="rule7"></span></li>
+				<li>Members of the House of Commons <span class="rule8"></span></li>
+				<li>Accredited Heads of Mission to Canada while in Canada <span class="rule9"></span></li>
+				<li>Half-Masting Initiated by a Province or Territory <span class="rule10"></span></li>
+				<li>Special Days <span class="rule11"></span></li>
 				<h4>Discretionary Provisions:</h4>
-				<li>Foreign Heads of State or Heads of Government - Half-masting Abroad <span class="s12"></span></li>
-				<li>Special Circumstances in a Foreign Country <span class="s13"></span></li>
-				<li>Employees of the Federal Government <span class="s14"></span></li>
+				<li>Foreign Heads of State or Heads of Government - Half-masting Abroad <span class="rule12"></span></li>
+				<li>Special Circumstances in a Foreign Country <span class="rule13"></span></li>
+				<li>Employees of the Federal Government <span class="rule14"></span></li>
 				<h4>Discretionary Authority of the Prime Minister</h4>
-				<li>Foreign Heads of State or Heads of Government - Half-masting in Canada <span class="s15"></span></li>
-				<li>Exceptional Circumstances <span class="s16"></span></li>
-				<li>Delegation of Authority<span class="s17"></span></li>
-				<li>Information from the Department of Canadian Heritage <span id="s18"></span></li>
+				<li>Foreign Heads of State or Heads of Government - Half-masting in Canada <span class="rule15"></span></li>
+				<li>Exceptional Circumstances <span class="rule16"></span></li>
+				<li>Delegation of Authority<span class="rule17"></span></li>
+				<li>Information from the Department of Canadian Heritage <span class="rule18"></span></li>
 				<h4>Procedures</h4>
-				<li>Legal Holidays<span class="s19"></span></li>
-				<li>Visiting Foreign Head of State or Head of Government <span class="s20"></span></li>
-				<li>Exceptions to Sections 19 and 20 <span class="s21"></span></li>
-				<li>Half-Masting Notice <span class="s22"></span></li>
-				<li>Coming into Effect<span class="s23"></span></li>
-				<h4 id="multiple">Multiple sections cited <span class="s24"></span></h4>
+				<li>Legal Holidays<span class="rule19"></span></li>
+				<li>Visiting Foreign Head of State or Head of Government <span class="rule20"></span></li>
+				<li>Exceptions to Sections 19 and 20 <span class="rule21"></span></li>
+				<li>Half-Masting Notice <span class="rule22"></span></li>
+				<li>Coming into Effect<span class="rule23"></span></li>
+				<h4>Multiple sections cited <span class="ruleMultiple"></span></h4>
 			</ol>
 			</div>
 
@@ -112,6 +112,8 @@
 			<p>*Indicates more than one half-masting on a day <span class="s25"></span></p>
 			<p><strong>Note:</strong> Although the half-masting notices (and therefore the calendar graph) don't always indicate this, one rule states Canadian flags are not to be at half mast on Victoria Day or Canada.</p>
 		</div>
+
+		<h3>Previous years</h3>
 
 		<div class="yearcontainer">
 			<h3>2016 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -207,82 +209,12 @@
 
 					<p><strong>When: </strong>{{ row.mastingperiod }}</p>
 					<p><strong>Where: </strong>{{ row.location }}</p>
-					<p><strong>Details: </strong>
+					<p><strong>Rule cited:</strong>
 
+					<a target="_blank" href="http://canada.pch.gc.ca/eng/1444133232495">{{row.section}}</a>
+					<span class="rule{{row.section}} s{{row.section}} legend"></span>
 
-					{% if row.section == "Multiple" %}
-						<span class="multiple"></span> <span class="legend s24"></span>
-					{% endif %}
-					{% if row.section == "23" %}
-						<span>Procedures: Coming into Effect.</span> <span class="legend s23"></span>
-					{% endif %}
-					{% if row.section == "22" %}
-						<span class="rule22">Procedures: Half-Masting Notice.</span> <span class="legend s22"></span>
-					{% endif %}
-					{% if row.section == "21" %}
-						<span class="rule21">Procedures: Exceptions to Legal Holidays or Visiting Foreign Head of State or Head of Government.</span> <span class="legend s21"></span>
-					{% endif %}
-					{% if row.section == "20" %}
-						<span class="rule20">Procedures: Visiting Foreign Head of State or Head of Government.</span> <span class="legend s20"></span>
-					{% endif %}
-					{% if row.section == "19" %}
-						<span class="rule19">Procedures: Legal Holidays.</span> <span class="legend s19"></span>
-					{% endif %}
-					{% if row.section == "18" %}
-						<span class="rule18">Discretionary Authority of the Prime Minister: Discretionary Authority of the Prime Minister.</span> <span class="legend s18"></span>
-					{% endif %}
-					{% if row.section == "17" %}
-						<span class="rule17">Discretionary Authority of the Prime Minister: Delegation of Authority.</span> <span class="legend s17"></span>
-					{% endif %}
-					{% if row.section == "16" %}
-						<span class="rule16">Discretionary Authority of the Prime Minister: Exceptional Circumstances.</span> <span class="legend s16"></span>
-					{% endif %}
-					{% if row.section == "15" %}
-						<span class="rule15">Discretionary Authority of the Prime Minister: Foreign Heads of State or Heads of Government - Half-masting in Canada.</span> <span class="legend s15"></span>
-					{% endif %}
-					{% if row.section == "14" %}
-						<span class="rule14">Discretionary Provisions: Employees of the Federal Government.</span> <span class="legend s14"></span>
-					{% endif %}
-					{% if row.section == "13" %}
-						<span class="rule13">Discretionary Provisions: Special Circumstances in a Foreign Country.</span> <span class="legend s13"></span>
-					{% endif %}
-					{% if row.section == "12" %}
-						<span class="rule12">Discretionary Provisions: Foreign Heads of State or Heads of Government - Half-masting Abroad.</span> <span class="legend s12"></span>
-					{% endif %}
-					{% if row.section == "11" %}
-						<span class="rule11">Mandatory Half-masting: Special Days.</span> <span class="legend s11"></span>
-					{% endif %}
-					{% if row.section == "10" %}
-						<span class="rule10">Mandatory Half-masting: Half-Masting Initiated by a Province or Territory.</span> <span class="legend s10"></span>
-					{% endif %}
-					{% if row.section == "9" %}
-						<span class="rule9">Mandatory Half-masting: Accredited Heads of Mission to Canada while in Canada.</span> <span class="legend s9"></span>
-					{% endif %}
-					{% if row.section == "8" %}
-						<span class="rule8">Mandatory Half-masting: Members of the House of Commons.</span> <span class="legend s8"></span>
-					{% endif %}
-					{% if row.section == "7" %}
-						<span class="rule7">Mandatory Half-masting: Privy Councillors and Senators.</span> <span class="legend s7"></span> 
-					{% endif %}
-					{% if row.section == "6" %}
-						<span class="rule6">Mandatory Half-masting: Lieutenant Governors.</span> <span class="legend s6"></span>
-					{% endif %}
-					{% if row.section == "5" %}
-						<span class="rule5">Mandatory Half-masting: Chief Justice of Canada and Members of the Canadian Ministry.</span> <span class="legend s5"></span>
-					{% endif %}
-					{% if row.section == "4" %}
-						<span class="rule4">Mandatory Half-masting: Former Prime Minister.</span> <span class="legend s4"></span>
-					{% endif %}
-					{% if row.section == "3" %}
-						<span class="rule3">Mandatory Half-masting: Former Governor General.</span> <span class="legend s3"></span>
-					{% endif %}
-					{% if row.section == "2" %}
-						<span class="rule2">Mandatory Half-masting: Sovereign's Family.</span> <span class="legend s2"></span>
-					{% endif %}
-					{% if row.section == "1" %}
-						<span class="rule1">Mandatory Half-masting: The Sovereign, the Governor General and the Prime Minister.</span> <span class="legend s1"></span>
-					{% endif %}
-					Rule cited: <a target="_blank" href="http://canada.pch.gc.ca/eng/1444133232495">{{row.section}}</a>.</p>
+					</p>
 				</div>
 
 		{% endfor %}
