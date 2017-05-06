@@ -1,11 +1,13 @@
 a {
     text-decoration: none;
-    padding: 1px;
     transition: border-bottom 0.3s;
+    border-bottom: 3px solid rgba(128,128,128,0.9);
+    line-height: 0.9;
+    display: inline-block;
 }
 
 a:hover {
-    border-bottom: 2px solid black;
+    border-bottom: 3px solid rgba(0,0,0,0.7);
 }
 
 .current_masting {
@@ -59,6 +61,7 @@ h3 {
 
 #container {
 	padding: 0 20px;
+	background:rgba(240,240,240, 0.2);
 }
 
 h3, p {
@@ -106,6 +109,7 @@ footer {
 
 .big {
 	max-height: inherit;
+	background: #fff;
 }
 
 div#chartContain {
@@ -165,6 +169,7 @@ span.legend {
     display: inline-block;
     vertical-align: middle;
     margin: 0;
+    border: 1px solid black;
 }
 
 #calendarContain, #intro2 {
@@ -189,7 +194,7 @@ span.legend {
 }
 
 #calendarContain {
-	margin: 20px -20px 5px -20px;
+	margin: 2px -20px 5px -20px;
 }
 
 .rule1 {
@@ -265,7 +270,7 @@ span.legend {
 }
 
 .rule19 {
-	background:#494B5A;  
+	background:#fff;  
 }
 
 .rule20 {
@@ -293,6 +298,8 @@ span.legend {
 	width: 12px;
 	height: 12px;
 	display: inline-block;
+	border: 1px solid black;
+	vertical-align: middle;
 }
 
 #rules h4#multiple {

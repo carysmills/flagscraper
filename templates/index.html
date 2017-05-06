@@ -2,7 +2,7 @@
 <html lang="en">
  
 <head>
-    <title>Half mast</title>
+    <title>Why are flags at half mast?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Source+Sans+Pro" rel="stylesheet">
@@ -102,15 +102,16 @@
 		</div>
 
 		<div class="yearcontainernow">
-			<h3>2017</h3>
+		<h3>2017</h3>
+
 			<div class="currentyear big">
+
 			</div>
 		</div>
 
 		<div id="calendarContain">
 			<div id="calendar_basic"></div>
 			<p>*Indicates more than one half-masting on a day <span class="s25"></span></p>
-			<p><strong>Note:</strong> Although the half-masting notices (and therefore the calendar graph) don't always indicate this, one rule states Canadian flags are not to be at half mast on Victoria Day or Canada.</p>
 		</div>
 
 		<h3>Previous years</h3>
@@ -211,8 +212,7 @@
 					<p><strong>Where: </strong>{{ row.location }}</p>
 					<p><strong>Rule cited:</strong>
 
-					<a target="_blank" href="http://canada.pch.gc.ca/eng/1444133232495">{{row.section}}</a>
-					<span class="rule{{row.section}} s{{row.section}} legend"></span>
+					{{row.section}} <span class="rule{{row.section}} s{{row.section}} legend"></span>
 
 					</p>
 				</div>
@@ -286,10 +286,14 @@
 	       				var newdiffdate = diffdate;
 	       				diffdate.setDate(diffdate.getDate() + i);
 
+	       				var dateString=diffdate;
+	       				dateString=new Date(dateString).toUTCString();
+	       				dateString=dateString.split(' ').slice(0, 4).join(' ')
+
 	       				if (dates.includes(diffdate.toString())) {
 	       					section = 31;
 	       					dataTable.addRows([
-	       					   [ diffdate, section,"<div class='tooltip'><strong>Multiple half-mastings</strong><br><strong>Date:</strong> " + month[newdiffdate.getMonth()] + " " + newdiffdate.getUTCDate() + "</div>" ],
+	       					   [ diffdate, section,"<div class='tooltip'><strong>Multiple half-mastings</strong><br><strong>Date:</strong> " + dateString + "</div>" ],
 	       					 ]);
 	       				}
 
@@ -298,7 +302,7 @@
 	       					section = parseInt(section);
 
 	       					dataTable.addRows([
-	       					   [ diffdate, section,"<div class='tooltip'><strong>Occasion</strong>: {{row.title}} <br><strong>Rule cited:</strong> {{row.section}} <br> <strong>Location(s)</strong>: {{ row.location }} <br> <strong>Dates:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + " - " + month[newdate2.getMonth()] + " " + newdate2.getUTCDate() + "</div>" ],
+	       					   [ diffdate, section,"<div class='tooltip'><strong>Occasion</strong>: {{row.title}} <br><strong>Rule cited:</strong> {{row.section}} <br> <strong>Location(s)</strong>: {{ row.location }} <br> <strong>Dates:</strong> " + dateString + "</div>" ],
 	       					 ]);
 	       				}
 	       				dates.push(diffdate.toString());
@@ -307,11 +311,16 @@
 
 	       		// ONLY ONE DAY
 	       		else {
+
+	       			var dateString1=date1;
+	       			dateString1=new Date(dateString1).toUTCString();
+	       			dateString1=dateString1.split(' ').slice(0, 4).join(' ')
+
 	       			if (dates.includes(date1.toString())) {
 	       				date2 == "NA";
 	       				section = 31;
 	       				dataTable.addRows([
-	       				   [ date1, section,"<div class='tooltip'><strong>Multiple half-mastings</strong> <br> <strong>Location(s)</strong>: {{ row.location }} <br><strong>Date:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + "</div>"],
+	       				   [ date1, section,"<div class='tooltip'><strong>Multiple half-mastings</strong> <br> <strong>Location(s)</strong>: {{ row.location }} <br><strong>Date:</strong> " + dateString1 + "</div>"],
 	       				 ]);
 	       			}
 
@@ -322,21 +331,27 @@
 	       				section = parseInt(section);
 
 	       				dataTable.addRows([
-	       				   [ date1, section,"<div class='tooltip'><strong>Occasion:</strong> {{row.title}} <br> <strong>Rule cited:</strong> {{row.section}} <br> <strong>Location(s)</strong>: {{ row.location }} <br> <strong>Date:</strong> " + month[newdate1.getMonth()] + " " + newdate1.getUTCDate() + "</div>"],
+	       				   [ date1, section,"<div class='tooltip'><strong>Occasion:</strong> {{row.title}} <br> <strong>Rule cited:</strong> {{row.section}} <br> <strong>Location(s)</strong>: {{ row.location }} <br> <strong>Date:</strong> " + dateString1 + "</div>"],
 	       				 ]);
 	       			}
 	       			dates.push(date1.toString());
 	       		}	
+
 	       	}
 
 	       {% endfor%}
+
+	       dataTable.addRows([
+	          [ new Date("July 1 2016"), 19,"<div class='tooltip'><strong>Occasion:</strong> Canada Day<br> <strong>Rule cited: 19</strong> The flag must be flown at full-mast.</strong></div>"],
+	          [ new Date("May 24 2016"), 19,"<div class='tooltip'><strong>Occasion:</strong> Victoria Day<br> <strong>Rule cited: 19</strong> The flag must be flown at full-mast.</div>"],
+	        ]);
 
 	       var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
 
 	       var options = {
 	       	tooltip: {isHtml: true},
 	         title: "Last year's half mastings",
-	         height: Math.min(($(window).width() / 3.7), 200),
+	         height: Math.min(($(window).width() / 3.7), 280),
 	         calendar: { 
 	         	focusedCellColor: {
 	         	      stroke: 'grey',
@@ -380,13 +395,14 @@
 	        "#BDC9D2",
 	        "#EA8B66",
 	        "#00C6C8",
-	        "#494B5A",
+	        "#fff",
 	        "#B894A6",
 	        "#006A66",
 	        "#F4D749",
 	       	"#6B94AA",
 	       	"#00005F",
-	       	"#bada55"]}
+	       	"#bada55",
+	       	]}
 	       };
 	       chart.draw(dataTable, options);
 	   }
