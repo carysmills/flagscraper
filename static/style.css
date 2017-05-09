@@ -310,10 +310,6 @@ span.legend {
     margin: 0;
 }
 
-#rules {
-   margin: 60px 0 0 0;
-}
-
 .tooltip {
     padding: 12px;
     font-size: 14px;
@@ -323,14 +319,13 @@ span.legend {
 	max-width: 30%;
 }
 
-#twitter-widget-0, .fb-share-button.fb_iframe_widget {
+footer .twitter-share-button {
     display: block;
-    margin: 9px 0;
+    margin: 5px auto;
 }
 
 iframe#twitter-widget-1, .fb-share-button.fb_iframe_widget {
     display: block;
-    margin: 20px auto 10px auto;
 }
 
 #chartContain .fb-share-button.fb_iframe_widget,#chartContain .twitter-share-button {
@@ -339,10 +334,36 @@ iframe#twitter-widget-1, .fb-share-button.fb_iframe_widget {
     max-width: 66px;
 }
 
+#xaxis text, #yaxis text {
+	font-size: 12px;
+}
+
+#wrapper svg {
+    display: block;
+    margin: 0 auto;
+}
+
+rect {
+    cursor: pointer;
+}
+
+div.tooltip2 {	
+    position: absolute;			
+    text-align: center;			
+    width: 90px;					
+    height: inherit;					
+    padding: 2px;				
+    background: #fff;
+    border-radius: 2px;			
+    pointer-events: none;
+    border: 2px solid rgb(173, 173, 173);	
+    font-size: 12px;		
+}
+
 @media(max-width: 500px) {
 	.tooltip {
 	    padding: 3px;
-	    font-size: 12px;
+	    font-size: 10px;
 	}
 	#intro {
 		height: inherit;
