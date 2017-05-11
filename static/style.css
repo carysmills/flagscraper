@@ -194,7 +194,8 @@ span.legend {
 }
 
 #calendarContain {
-	margin: 2px -20px 5px -20px;
+    margin: 80px -20px 5px -20px;
+    clear: both;
 }
 
 .rule1 {
@@ -358,6 +359,12 @@ div.tooltip2 {
     pointer-events: none;
     border: 2px solid rgb(173, 173, 173);	
     font-size: 12px;		
+}
+
+#firstContainer {
+	display: block;
+	margin: 0 auto;
+	max-width: 1500px;
 }
 
 @media(max-width: 500px) {

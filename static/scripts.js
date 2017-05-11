@@ -52,18 +52,18 @@ $(".yearcontainer > h3").click(function(){
 });
 
 // D3 !!!
-var dollars =[0,0,0,0,0,0,30,1,1,57,39,0,0,5,0,14,0,0,1,0,0,0,0,13];
+var rules =[$(".s1").length,$(".s2").length,$(".s3").length,$(".s4").length,$(".s5").length,$(".s6").length,$(".s7").length,$(".s8").length,$(".s9").length,$(".s10").length,$(".s11").length,$(".s12").length,$(".s13").length,$(".s14").length,$(".s15").length,$(".s16").length,$(".s17").length,$(".s18").length,$(".s19").length,$(".s20").length,$(".s21").length,$(".s22").length,$(".s23").length,$(".sMultiple").length];
 var categories= ["The Sovereign, the Governor General and the Prime Minister", "Sovereign's Family", 'Former Prime Minister', 'Former Governor General', 'Chief Justice of Canada and Members of the Canadian Ministry','Lieutenant Governors', 'Privy Councillors and Senators', 'Members of the House of Commons', 'Accredited Heads of Mission to Canada while in Canada', 'Half-Masting Initiated by a Province or Territory', 'Special Days', 'Foreign Heads of State or Heads of Government - Half-masting Abroad', 'Special Circumstances in a Foreign Country', 'Employees of the Federal Government', 'Foreign Heads of State or Heads of Government - Half-masting in Canada', 'Exceptional Circumstances', 'Delegation of Authority', 'Information from the Department of Canadian Heritage', 'Legal Holidays', 'Visiting Foreign Head of State or Head of Government', 'Exceptions to Sections 19 and 20', 'Half-Masting Notice', 'Coming into Effect', 'Multiple rules cited'];
 var colors = ["#FFFF00","#1CE6FF","#FF34FF","#008941","#006FA6","#A30059","#63FFAC", "#B79762","#997D87","#FFB500","#C2FFED","#7900D7","#D25B88","#6C5E46","#6C8F7D","#BDC9D2","#EA8B66","#00C6C8","#fff","#B894A6","#006A66","#F4D749", "#6B94AA","#00005F"];
 
-var newdollars = [];
+var newrules = [];
 var newcategories = [];
 var newcolors = [];
 
 // remove 0s
-for (i=0;i < dollars.length;i++) {
-	if (dollars[i] !== 0) {
-		newdollars.push(dollars[i]);
+for (i=0;i < rules.length;i++) {
+	if (rules[i] !== 0) {
+		newrules.push(rules[i]);
 		newcategories.push(categories[i]);
 		newcolors.push(colors[i]);
   }
@@ -149,7 +149,7 @@ var chart = canvas.append('g')
 					.attr("transform", "translate(15,0)")
 					.attr('id','bars')
 					.selectAll('rect')
-	 .data(newdollars)
+	 .data(newrules)
 	             	.enter()
 					.append('rect')
 					.attr('height',35)
