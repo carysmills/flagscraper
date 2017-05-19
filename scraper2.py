@@ -7,6 +7,7 @@ import dateutil
 from datetime import datetime
 import sys
 import tweepy, time, sys
+import lxml
 
 CONSUMER_KEY = 'tClwWO7mTLmmXLoPvPa0WMbVt'
 CONSUMER_SECRET = 'PbWfOVnWLua0Nv52SHBiV7aL7BDaa0jiw4RWbMfG1dVhdJfzko'
@@ -21,7 +22,7 @@ sys.setdefaultencoding('utf-8')
 
 r  = requests.get("http://canada.pch.gc.ca/eng/rss?searchFilter=008")
 data = r.text
-soup = BeautifulSoup(data, "html.parser")
+soup = BeautifulSoup(data, "lxml")
 containers = soup.findAll("item")
 index1 = 0
 
@@ -93,10 +94,10 @@ with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'a') as csvfi
 
 			# get the section links
 			for link in section:
+				linktitle = link.text
 				print link
 				print section
-			    linktitle = link.text
-			    print linktitle
+				print linktitle
 
 			# if more than one section or and, make variable be called multiple. otherwise just get the section by itself
 			if (len(section) > 1) or ("and" in linktitle) or ("Sections" in linktitle) or ("And" in linktitle) or ("&" in linktitle):
@@ -112,7 +113,7 @@ with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'a') as csvfi
 			# tweet bot
 			func = lambda s: s[:1].lower() + s[1:] if s else ''
 
-			tweet = "Flags will be at half mast for " + title + " " + func(mastingperiod.lstrip())
+			tweet = "Flags will be at half mast for: " + title 
 			link2 = "http://halfmast.ca"
 			tweetfinal = tweet[:117] + " " + link2
 			print tweetfinal
