@@ -112,9 +112,9 @@ with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'a') as csvfi
 			# tweet bot
 			func = lambda s: s[:1].lower() + s[1:] if s else ''
 
-			tweet = "Flags will be at half mast for: " + title
+			tweet = "Flags will be at half mast for " + title + " " + func(mastingperiod.lstrip())
 			link2 = "http://halfmast.ca"
-			tweetfinal = tweet[:116] + " " + link2
+			tweetfinal = tweet[:117] + " " + link2
 			print tweetfinal
 			api.update_status(status=tweetfinal)
 
