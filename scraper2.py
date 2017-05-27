@@ -34,7 +34,6 @@ with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'r') as oldfi
 
 # write the new file, if there's been a new entry
 with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'a') as csvfile:
-	print oldpubdate
 	csvwriter = csv.writer(csvfile, delimiter="|")
 	for i in containers:
 		latestdate = containers[index1].find("pubdate").text.encode('utf-8').strip()
@@ -95,9 +94,6 @@ with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'a') as csvfi
 			# get the section links
 			for link in section:
 				linktitle = link.text
-				print link
-				print section
-				print linktitle
 
 			# if more than one section or and, make variable be called multiple. otherwise just get the section by itself
 			if (len(section) > 1) or ("and" in linktitle) or ("Sections" in linktitle) or ("And" in linktitle) or ("&" in linktitle):
@@ -115,8 +111,7 @@ with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'a') as csvfi
 
 			tweet = "Flags will be at half mast for: " + title 
 			link2 = "http://halfmast.ca"
-			tweetfinal = tweet[:117] + " " + link2
-			print tweetfinal
+			tweetfinal = tweet[:113] + "... " + link2
 			api.update_status(status=tweetfinal)
 
 			# iterate
