@@ -106,13 +106,13 @@ with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'a') as csvfi
 			# write to the CSV
 			csvwriter.writerow([title, pubdate, mastingperiod, occasion, location, sectionno, date1, date2, year])
 
-			# tweet bot
+			# tweet bots
 			func = lambda s: s[:1].lower() + s[1:] if s else ''
 
 			tweet = "Flags will be at half mast for: " + title 
 			link2 = "http://halfmast.ca"
 			tweetfinal = tweet[:113] + "... " + link2
-			api.update_status(status=tweetfinal)
+			# api.update_status(status=tweetfinal)
 
 			# iterate
 			index1+=1
