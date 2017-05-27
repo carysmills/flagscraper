@@ -112,7 +112,7 @@ with open('/var/www/flagscraper/flagscraper/static/flagdata2.csv', 'a') as csvfi
 			tweet = "Flags will be at half mast for: " + title 
 			link2 = "http://halfmast.ca"
 			tweetfinal = tweet[:113] + "... " + link2
-			# api.update_status(status=tweetfinal)
+			api.update_status(status=tweetfinal)
 
 			# iterate
 			index1+=1
