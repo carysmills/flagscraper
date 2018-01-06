@@ -96,7 +96,7 @@
 			</div>
 
 			<div class="yearcontainernow">
-			<h3>2017</h3>
+			<h3>2018</h3>
 
 				<div class="currentyear big">
 
@@ -109,6 +109,14 @@
 			</div>
 
 			<h3>Previous years</h3>
+			
+						<div class="yearcontainer">
+				<h3>2017 <i class="fa fa-chevron-down" aria-hidden="true"></i>
+	</h3>
+				<div class="year2017">
+				</div>
+			</div>
+
 
 			<div class="yearcontainer">
 				<h3>2016 <i class="fa fa-chevron-down" aria-hidden="true"></i>
@@ -169,6 +177,11 @@
 
 					{% if row.happening == False and row.currentyear == row.year %}
 						<div class="current_year masting">
+						<h3>{{ row.title }}</h3>
+					{% endif %}
+							
+					{% if row.year == "2017" %}
+						<div class="masting2017 masting">
 						<h3>{{ row.title }}</h3>
 					{% endif %}
 
