@@ -93,7 +93,7 @@ i {
 	color: #fff;
 }
 
-.currentyear, .year2016, .year2015, .year2014, .year2013, .year2012, .year2011 {
+.currentyear, .year2017, .year2016, .year2015, .year2014, .year2013, .year2012, .year2011 {
 	max-height: 0;
 	overflow: hidden;
 	-webkit-transition: max-height 0.8s;
