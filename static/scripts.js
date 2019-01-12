@@ -86,7 +86,7 @@ for (i=0;i < rules.length;i++) {
 }
 
 var grid = d3.range(25).map(function(i){
-  return {'x1':0,'y1':0,'x2':0,'y2':480};
+  return {'x1':0,'y1':0,'x2':0,'y2':540};
 });
 
 var tickVals = grid.map(function(d,i){
@@ -141,7 +141,7 @@ var div = d3.select('#wrapper')
 
 
 var x_xis = canvas.append('g')
-  .attr("transform", "translate(15,480)")
+  .attr("transform", "translate(15,540)")
   .attr('id','xaxis')
   .call(xAxis);
 
@@ -150,7 +150,7 @@ var x_label = canvas.append("text")
 		      .attr("font-size", "13px")
 		      .attr("font-weight", "bold")
 		      .attr("x", 20)
-		      .attr("y", 517)
+		      .attr("y", 540)
 		      .text("Number of half-mastings");
 
 var y_label = canvas.append("text")
