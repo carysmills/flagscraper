@@ -19,6 +19,10 @@ function placeContent() {
 		$(".currentyear").append($(this));
 	});
 	
+	$(".masting2018").each(function(){
+		$(".year2018").append($(this));
+	});
+	
 	
 	$(".masting2017").each(function(){
 		$(".year2017").append($(this));
