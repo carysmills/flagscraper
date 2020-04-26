@@ -49,13 +49,13 @@
 
 			<div id="intro2">
 
-			<h3>This site visualizes and lists the Canadian government's <a target="_blank" href="http://canada.pch.gc.ca/eng/1461849633127">half-masting notices</a> and the rules that are cited.</h3>
+			<h3>This site visualizes and lists the Canadian government's <a target="_blank" href="http://canada.pch.gc.ca/eng/1461849633127">half-masting notices</a> from mid-2011 to 2019 and the rules that are cited.</h3>
 
 			</div>
 
 			<div id="chartContain">
 				<h3>Rules cited in half-masting notices</h3>
-				<p>Half-mastings by rules, April 16, 2011 to present</p>
+				<p>Half-mastings by rules, April 16, 2011 to 2019</p>
 
 				<div id="wrapper"></div>
 
@@ -168,19 +168,8 @@
 
 		{% for row in rows %}
 
-					{% if row.happening == True %}
-						<div class="current_masting masting">
-						<h3 id="current">Current half-masting:</h3>
-						<h3> {{ row.title }}</h3>
 
-						<a class="twitter-share-button"
-						  href="https://twitter.com/intent/tweet?text=Flags%20are%20at%20half%20mast%20for%20{{row.title}}">Tweet</a>
-
-						  <div class="fb-share-button" data-href="http://halfmast.ca" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhalfmast.ca%2F&amp;src=sdkpreparse">Share</a></div>
-
-					{% endif %}
-
-					{% if row.happening == False and row.currentyear == row.year %}
+					{% if row.year == "2019" %}
 						<div class="current_year masting">
 						<h3>{{ row.title }}</h3>
 					{% endif %}
